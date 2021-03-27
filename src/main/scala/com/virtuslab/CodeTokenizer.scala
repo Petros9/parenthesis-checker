@@ -6,12 +6,14 @@ object CodeTokenizer {
   
     def tokenizeCode(code: String): Tokenized = code.tokenize
 
-    def redundantTokenFilter(tokens: Tokenized) :String = {
+    def redundantTokenMapper(tokens: Tokenized) :String = {
         tokens.get.tokens
-          .filter(token => {
-              !token.text.startsWith("\"") &&
-                !token.text.startsWith("//") &&
-                  !token.text.startsWith("/*")
+          .map(token => {
+            if(token.text.startsWith("\"") ||
+                token.text.startsWith("//") ||
+                  token.text.startsWith("/*")) token.formatted(" " * token.text.length)
+
+            else token
           }).mkString("")
     }
 }

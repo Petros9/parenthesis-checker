@@ -18,7 +18,7 @@ object Main {
     println(code)
     println()
     println("### Does it have correct parenthesis?")
-    val (correctParenthesis, potentialPosition) = areCorrectParenthesis(CodeTokenizer.redundantTokenFilter(CodeTokenizer.tokenizeCode(code)), 0, 0, 0 )
+    val (correctParenthesis, potentialPosition) = areCorrectParenthesis(CodeTokenizer.redundantTokenMapper(CodeTokenizer.tokenizeCode(code)), 0, 0, 0 )
     if (correctParenthesis) println("Yes!")
     else println("No! Wrong parenthesis at position: " + potentialPosition)
   }
