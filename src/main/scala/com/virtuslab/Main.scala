@@ -18,8 +18,9 @@ object Main {
     println(code)
     println()
     println("### Does it have correct parenthesis?")
-    if (areCorrectParenthesis(code, 0, stack = new util.Stack[Int])) println("Yes!")
-    else println("No!")
+    val stack = new util.Stack[Int]
+    if (areCorrectParenthesis(code, 0, stack)) println("Yes!")
+    else println("No! Wrong parenthesis at position: " +  stack.get(0))
   }
 
   /** Utility method to read code from a file path.
@@ -57,10 +58,10 @@ object Main {
         stack.empty()
 
     } else if (code.charAt(currentPosition).equals('(')) {
-      Main.areCorrectParenthesis(code, currentPosition + 1, addToStack(stack, 1))
+      Main.areCorrectParenthesis(code, currentPosition + 1, addToStack(stack, currentPosition))
 
     } else if (code.charAt(currentPosition).equals(')')) {
-      if (stack.empty()) Main.areCorrectParenthesis(code, code.length, addToStack(stack, 1))
+      if (stack.empty()) Main.areCorrectParenthesis(code, code.length, addToStack(stack, currentPosition))
       else Main.areCorrectParenthesis(code, currentPosition + 1, takeFromStack(stack))
 
     } else {
