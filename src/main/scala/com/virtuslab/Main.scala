@@ -12,7 +12,7 @@ import scala.jdk.CollectionConverters._
 object Main {
 
   def main(args: Array[String]): Unit = {
-    val code = readFromFile("C:\\Users\\Svatopluk\\Desktop\\Scala\\recruitment-main\\code-samples\\SimpleError.scala")
+    val code = readFromFile("C:\\Users\\Svatopluk\\Desktop\\Scala\\recruitment-main\\code-samples\\SimpleCorrect.scala")
     //val code = "class A { method( \") \"/*   ) */ ) () (/*(((())))))(((((*/) // ) }"
     println("### Input code")
     println(code)
@@ -42,6 +42,10 @@ object Main {
     * @return Boolean answer to the the posed question.
     */
 
+  // the solution bases on pseudo-buffer, whether we encounter valid '(' 1 is added to the buffer
+  // and whether we encounter ')' 1 is subtracted from the buffer,
+  // the function returns false if we encounter ')' with the "empty" buffer or the buffer in the end is not "empty"
+  // the potential spot is set when the program reaches '(' or ')' with empty buffer
   @tailrec
   def areCorrectParenthesis(code: String, currentPosition: Int, pseudoStack:Int, potentialSpot:Int): (Boolean, Int) = {
     if (currentPosition.equals(code.length)) {
